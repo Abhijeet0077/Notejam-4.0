@@ -19,3 +19,7 @@ spec:
         image: imohitbhatt/notejam:4.0
         ports:
         - containerPort: 8000
+      volumes:
+      - name: notejam-pv-volume
+        persistentVolumeClaim:
+          claimName: notejam-pv-claim
