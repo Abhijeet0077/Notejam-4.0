@@ -18,8 +18,10 @@ spec:
       - name: notejam
         image: imohitbhatt/notejam:4.0
         ports:
-        - containerPort: 8000
-      volumes:
-      - name: notejam-pv-volume
-        persistentVolumeClaim:
-          claimName: notejam-pv-claim
+          - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3

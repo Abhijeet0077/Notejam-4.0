@@ -15,7 +15,16 @@ spec:
         app: notejam
     spec:
       containers:
-      - name: notejam
-        image: imohitbhatt/notejam:4.0
-        ports:
-        - containerPort: 8000
+        - name: notejam
+          image: imohitbhatt/notejam:4.0
+          ports:
+            - containerPort: 8000
+
+        volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: notejam-pv-volume
+
+      volumes:
+      - name: notejam-pv-volume
+        persistentVolumeClaim:
+          claimName: notejam-pv-claim
