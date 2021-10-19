@@ -20,11 +20,11 @@ spec:
           ports:
             - containerPort: 8000
 
-        volumeMounts:
+          volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: notejam-pv-volume
 
       volumes:
-      - name: notejam-pv-volume
-        persistentVolumeClaim:
-          claimName: notejam-pv-claim
+        - name: notejam-pv-volume
+          persistentVolumeClaim:
+            claimName: notejam-pv-claim
