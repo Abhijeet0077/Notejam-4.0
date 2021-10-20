@@ -4,8 +4,8 @@ metadata:
   name: postgres-service
 spec:
   selector:
-    app: notejam
-  type: LoadBalancer
+    app: postgres-con
   ports:
-    - port: 5432
+    - protocol: TCP
+      port: 5432
       targetPort: 5432

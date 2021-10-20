@@ -1,20 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: postgres-deployment
+metadata: 
+  name: notejam-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-con
+      app: notejam
   template:
     metadata:
       labels:
-        app: postgres-con
+        app: notejam
     spec:
       containers:
-        - name: postgres-container
-          image: postgres:8.4.22
+        - name: notejam-con
+          image: imohitbhatt/notejam:4.0
+          ports:
+            - containerPort: 8000
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -28,22 +30,16 @@ spec:
                   name: postgres-credentials
                   key: password
 
-            - name: POSTGRES_DB
+            - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
                   name: postgres-config
-                  key: db
+                  key: host
 
-            #- name: POSTGRES_DB
-             # value: notejam
+                  # - name: POSTGRES_HOST
+                  # value: postgres-service
 
-          ports:
-            - containerPort: 5432
-          volumeMounts:
-            - name: postgres-pv
-              mountPath: /var/lib/postgresql/data
-
-      volumes:
-        - name: postgres-pv
-          persistentVolumeClaim:
-            claimName: postgres-claim
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
