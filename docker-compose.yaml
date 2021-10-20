@@ -16,7 +16,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
   web:
-    image: imohitbhatt/notejam:4.0
+    image: imohitbhatt/notejam:4.1
     container_name: web
     command: bash -c "python2 ./notejam/manage.py syncdb --noinput && python2 ./notejam/manage.py migrate && python2 ./notejam/manage.py runserver 0.0.0.0:8000"
     ports:

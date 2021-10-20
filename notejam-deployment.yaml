@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: notejam-con
-          image: imohitbhatt/notejam:4.0
+          image: imohitbhatt/notejam:4.1
           ports:
             - containerPort: 8000
           env:
